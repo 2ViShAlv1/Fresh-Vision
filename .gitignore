@@ -1,0 +1,25 @@
+# Python Environments
+venv/
+env/
+__pycache__/
+*.pyc
+
+# Jupyter Notebooks
+*.ipynb
+.ipynb_checkpoints/
+Untitled*/
+Untitled*/
+
+# Reports & Thesis (as requested, skip reports)
+Reports/
+*.pdf
+FreshVision_Methodology.md
+
+# Agent and IDE directories
+.agents/
+.codex/
+.vscode/
+
+# Outputs and Datasets
+outputs/
+Unified_Dataset/
