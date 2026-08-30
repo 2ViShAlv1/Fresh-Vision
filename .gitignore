@@ -23,3 +23,7 @@ FreshVision_Methodology.md
 # Outputs and Datasets
 outputs/
 Unified_Dataset/
+
+# Frontend build output
+node_modules/
+frontend/dist/

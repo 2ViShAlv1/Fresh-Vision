@@ -1,4 +1,12 @@
-streamlit
-numpy
+# Backend API
+fastapi
+uvicorn[standard]
+python-multipart
+
+# Model + imaging
 tensorflow
+numpy
 Pillow
+
+# Legacy Streamlit prototype (app.py)
+streamlit
