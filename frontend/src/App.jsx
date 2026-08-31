@@ -3,7 +3,7 @@ import NavBar from './components/NavBar'
 import Hero from './components/Hero'
 import Dropzone from './components/Dropzone'
 import ResultPanel from './components/ResultPanel'
-import { Coverage, Faq, Footer, HowItWorks } from './components/Sections'
+import { CallToAction, Coverage, Faq, Footer, HowItWorks } from './components/Sections'
 import { checkHealth, fetchClasses, predict } from './lib/api'
 
 export default function App() {
@@ -153,6 +153,7 @@ export default function App() {
         <HowItWorks />
         <Coverage classes={classes} />
         <Faq />
+        <CallToAction onCta={scrollToAnalyzer} />
       </main>
       <Footer />
     </div>

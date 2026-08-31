@@ -7,9 +7,20 @@ const LINKS = [
   { href: '#faq', label: 'FAQ' },
 ]
 
+const STORAGE_KEY = 'freshvision-theme'
+
+function readStoredTheme() {
+  try {
+    return localStorage.getItem(STORAGE_KEY)
+  } catch {
+    return null
+  }
+}
+
 export default function NavBar({ health }) {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const [theme, setTheme] = useState(() => readStoredTheme() || 'light')
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -18,7 +29,17 @@ export default function NavBar({ health }) {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    try {
+      localStorage.setItem(STORAGE_KEY, theme)
+    } catch {
+      /* storage unavailable — the in-memory theme still applies */
+    }
+  }, [theme])
+
   const status = health.state === 'ready' ? 'online' : health.state === 'loading' ? 'connecting' : 'offline'
+  const isDark = theme === 'dark'
 
   return (
     <header className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
@@ -48,8 +69,27 @@ export default function NavBar({ health }) {
             <i />
             {status === 'online' ? 'Models online' : status === 'connecting' ? 'Connecting' : 'API offline'}
           </span>
+
           <button
-            className="nav__toggle"
+            className="theme-toggle"
+            onClick={() => setTheme(isDark ? 'light' : 'dark')}
+            aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
+            title={isDark ? 'Light mode' : 'Dark mode'}
+          >
+            {isDark ? (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="4" />
+                <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+              </svg>
+            )}
+          </button>
+
+          <button
+            className={`nav__toggle ${open ? 'is-open' : ''}`}
             aria-label="Toggle navigation"
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}

@@ -13,6 +13,11 @@ function EmptyState() {
       </span>
       <h3>No analysis yet</h3>
       <p>Upload a photo of a fruit or vegetable and the pipeline will grade it here.</p>
+      <div className="result__tips">
+        <span>🍎 One item per photo</span>
+        <span>💡 Even lighting</span>
+        <span>🎯 Centred in frame</span>
+      </div>
     </div>
   )
 }
@@ -22,7 +27,7 @@ function LoadingState() {
   return (
     <div className="result result--loading">
       <div className="scanner" aria-hidden="true">
-        <span /><span /><span />
+        <span /><span /><span /><span />
       </div>
       <h3>Analyzing image…</h3>
       <ul className="steps">
@@ -104,7 +109,7 @@ export default function ResultPanel({ result, loading, error, onRetry }) {
                   key={item.label}
                   label={item.label}
                   value={item.confidence}
-                  color={i === 0 ? 'linear-gradient(90deg,#4f9cff,#7dd3fc)' : 'rgba(255,255,255,0.22)'}
+                  color={i === 0 ? 'linear-gradient(90deg, var(--blue), var(--teal))' : 'var(--border-strong)'}
                   mono
                 />
               ))}
@@ -117,7 +122,7 @@ export default function ResultPanel({ result, loading, error, onRetry }) {
                   key={item.key}
                   label={item.label}
                   value={item.confidence}
-                  color={item.key === result.freshnessKey ? theme.color : 'rgba(255,255,255,0.22)'}
+                  color={item.key === result.freshnessKey ? theme.color : 'var(--border-strong)'}
                   mono
                 />
               ))}
@@ -140,7 +145,7 @@ export default function ResultPanel({ result, loading, error, onRetry }) {
             <section className="panel">
               <h4>Closest produce matches</h4>
               {result.topProduce.map((item) => (
-                <ConfidenceBar key={item.label} label={item.label} value={item.confidence} color="rgba(255,255,255,0.28)" mono />
+                <ConfidenceBar key={item.label} label={item.label} value={item.confidence} color="var(--border-strong)" mono />
               ))}
             </section>
           ) : null}

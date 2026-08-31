@@ -179,15 +179,79 @@ export function Faq() {
   )
 }
 
+export function CallToAction({ onCta }) {
+  return (
+    <section className="section" id="cta" style={{ paddingTop: 0 }}>
+      <Reveal>
+        <div className="cta">
+          <h2>Grade your first image in under a second</h2>
+          <p>
+            No account, no upload limit, no data leaves the machine. Drop in a photo and see the
+            full confidence breakdown for yourself.
+          </p>
+          <button className="btn btn--primary btn--light" onClick={onCta}>
+            Try the analyzer
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </button>
+        </div>
+      </Reveal>
+    </section>
+  )
+}
+
 export function Footer() {
   return (
     <footer className="footer">
       <div className="footer__inner">
-        <div>
-          <strong>Fresh Vision</strong>
-          <p>AI-powered produce quality analysis · MobileNetV2 · TensorFlow · FastAPI · React</p>
+        <div className="footer__brand">
+          <a className="brand" href="#top">
+            <span className="brand__mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 20c0-8 5.5-13 16-13 0 9-5.5 13.5-16 13z" />
+                <path d="M4 20c3.6-4.2 7.5-7 11.5-8.6" />
+              </svg>
+            </span>
+            <span className="brand__text">Fresh<span>Vision</span></span>
+          </a>
+          <p>
+            AI-powered produce quality analysis. A two-stage MobileNetV2 pipeline that identifies
+            what it sees, then grades how fresh it is — with every confidence figure on show.
+          </p>
+          <div className="footer__tech">
+            {['TensorFlow', 'MobileNetV2', 'FastAPI', 'React', 'Vite'].map((tech) => (
+              <span key={tech}>{tech}</span>
+            ))}
+          </div>
         </div>
-        <p className="footer__note">Predictions are advisory. Always confirm perishable goods manually.</p>
+
+        <div className="footer__links">
+          <div className="footer__col">
+            <h4>Product</h4>
+            <a href="#analyze">Analyzer</a>
+            <a href="#how">Pipeline</a>
+            <a href="#coverage">Coverage</a>
+            <a href="#faq">FAQ</a>
+          </div>
+          <div className="footer__col">
+            <h4>Models</h4>
+            <span>Produce identifier · 14 classes</span>
+            <span>Freshness head · 5 levels</span>
+            <span>ImageNet gatekeeper</span>
+          </div>
+          <div className="footer__col">
+            <h4>Privacy</h4>
+            <span>No image storage</span>
+            <span>No database writes</span>
+            <span>In-memory inference only</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="footer__bar">
+        <span>© {new Date().getFullYear()} Fresh Vision · Built for produce quality research.</span>
+        <span>Predictions are advisory — always confirm perishable goods manually.</span>
       </div>
     </footer>
   )

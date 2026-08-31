@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍏</text></svg>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4f7fb" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#080b11" media="(prefers-color-scheme: dark)" />
     <meta name="description" content="Fresh Vision — AI-powered fruit & vegetable quality analyzer." />
     <title>Fresh Vision — AI Produce Quality Analyzer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -11,6 +13,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
   </head>
   <body>
+    <script>
+      // Apply the stored theme before first paint so there is no flash.
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem('freshvision-theme') || 'light'
+      } catch (e) {
+        document.documentElement.dataset.theme = 'light'
+      }
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

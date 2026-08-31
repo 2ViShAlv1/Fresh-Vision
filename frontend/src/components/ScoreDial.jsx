@@ -11,7 +11,7 @@ export default function ScoreDial({ value, color, caption }) {
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} role="img" aria-label={`${pct.toFixed(0)} percent`}>
         <circle
           cx={size / 2} cy={size / 2} r={radius}
-          fill="none" stroke="rgba(255,255,255,0.07)" strokeWidth={stroke}
+          fill="none" stroke="var(--track)" strokeWidth={stroke}
         />
         <circle
           className="dial__progress"
