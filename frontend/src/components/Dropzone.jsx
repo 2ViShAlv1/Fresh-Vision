@@ -3,6 +3,7 @@ import { formatBytes, validateFile } from '../lib/format'
 
 export default function Dropzone({ onFile, disabled, file, previewUrl, onClear }) {
   const inputRef = useRef(null)
+  const cameraInputRef = useRef(null)
   const [dragging, setDragging] = useState(false)
   const [localError, setLocalError] = useState(null)
 
@@ -65,6 +66,18 @@ export default function Dropzone({ onFile, disabled, file, previewUrl, onClear }
             e.target.value = ''
           }}
         />
+        <input
+          ref={cameraInputRef}
+          type="file"
+          accept="image/*"
+          capture="environment"
+          hidden
+          onChange={(e) => {
+            const picked = e.target.files?.[0]
+            if (picked) accept(picked)
+            e.target.value = ''
+          }}
+        />
 
         {previewUrl ? (
           <figure className="dropzone__preview">
@@ -84,6 +97,17 @@ export default function Dropzone({ onFile, disabled, file, previewUrl, onClear }
             </span>
             <h3>Drop an image here</h3>
             <p>or click to browse · paste from clipboard</p>
+            <button
+              type="button"
+              className="btn btn--tiny dropzone__camera-btn"
+              disabled={disabled}
+              onClick={(e) => {
+                e.stopPropagation()
+                cameraInputRef.current?.click()
+              }}
+            >
+              📷 Take a photo
+            </button>
             <span className="dropzone__hint">JPG · PNG · WEBP · up to 10 MB</span>
           </div>
         )}
@@ -93,6 +117,9 @@ export default function Dropzone({ onFile, disabled, file, previewUrl, onClear }
         <div className="dropzone__actions">
           <button className="btn btn--tiny" onClick={() => inputRef.current?.click()} disabled={disabled}>
             Replace image
+          </button>
+          <button className="btn btn--tiny" onClick={() => cameraInputRef.current?.click()} disabled={disabled}>
+            📷 Retake
           </button>
           <button className="btn btn--tiny btn--danger" onClick={onClear} disabled={disabled}>
             Clear
